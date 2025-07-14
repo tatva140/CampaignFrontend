@@ -1,0 +1,102 @@
+<div class="container">
+  <div
+    class="d-flex align-items-center justify-content-center vh-100 overflow-hidden"
+  >
+    <div
+      class="row shadow"
+      style="width: 50%; height: 50%; background-color: white"
+    >
+      <div class="col-md-12 d-flex align-items-center justify-content-center">
+        <div class="w-100">
+          <div
+            class="d-flex overflow-hidden align-items-center justify-content-center w-auto mt-3"
+          >
+            <h2 style="color: rgba(148, 8, 8, 0.521)">Login</h2>
+          </div>
+          <div class="row align-items-center justify-content-center p-0">
+            <h3 class="mt-3 w-75" style="color: rgba(148, 8, 8, 0.521)">
+              Welcome,
+            </h3>
+            <form class="w-75" (ngSubmit)="onLogin()">
+              <div class="mt-3 mb-3">
+                <div class="input-group mb-3">
+                  <input
+                    [(ngModel)]="email"
+                    name="email"
+                    class="form-control"
+                    required
+                    placeholder="Email"
+                    aria-label="Email"
+                  />
+                  <span class="input-group-text"
+                    ><i class="fas fa-envelope"></i
+                  ></span>
+                </div>
+              </div>
+              <div class="mb-4">
+                <div class="input-group mb-3">
+                  <input
+                    [(ngModel)]="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Password"
+                    id="pwd"
+                    type="password"
+                    aria-label="Password"
+                    style="position: relative"
+                    required
+                  />
+                  <span class="input-group-text"
+                    ><i class="fa-solid fa-eye" id="eye"></i
+                  ></span>
+                </div>
+              </div>
+              <div class="text-danger"  *ngIf="validationErrors!=null">
+               <ul>
+                <li>
+                    {{ validationErrors }}
+                </li>
+               </ul>
+
+              </div>
+              <div class="mt-4 mb-2">
+                <button
+                  type="submit"
+                  class="btn w-100"
+                  style="
+                    border-radius: 5px;
+                    background-color: rgba(148, 8, 8, 0.521);
+                    color: white;
+                  "
+                >
+                  Login
+                </button>
+              </div>
+              <span>
+                Don't have an Account?
+                <a
+                  style="
+                    text-decoration: none;
+                    color: rgba(148, 8, 8, 0.521);
+                    cursor: pointer;
+                  "
+                  class="me-2 text-end"
+                  asp-action="Register"
+                  asp-controller="Authentication"
+                  >Register</a
+                ></span
+              >
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</div>
