@@ -5,7 +5,7 @@ import { LocalStorageService } from '../services/localstorage.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class GuestGuard implements CanActivate {
   constructor(
     private router: Router,
     private localStorage: LocalStorageService
@@ -14,8 +14,8 @@ export class AuthGuard implements CanActivate {
   canActivate(): boolean | UrlTree {
     const token = this.localStorage.getItem();
     if (token) {
-      return true;
+      return this.router.createUrlTree(['/campaign']);;
     }
-    return this.router.createUrlTree(['/auth/login']);
+    return true;
   }
 }

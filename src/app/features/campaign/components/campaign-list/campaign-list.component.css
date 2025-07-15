@@ -1,0 +1,17 @@
+h2{
+  margin:1rem;
+  color:rgba(0,102,167,1);
+  margin-top: 2rem;
+
+}
+.loadMore{
+  background-color: rgba(0,102,167,1);;
+  color: white;
+  margin-left:1rem;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+.addBtn{
+  background-color: rgba(0,102,167,1);
+  color: white;
+}

@@ -1,0 +1,18 @@
+
+.navbar{
+  background:rgba(0,102,167,1);
+  padding:1rem;
+  color:#fff;
+  }
+  .navbar a{
+  color:#fff;
+  margin-right:1rem;
+  text-decoration:none;
+  cursor:pointer;
+  }
+  button{
+  background:white;
+  border-radius:5px;
+  color:rgba(0,102,167,1);
+  padding:0.5rem;
+  }

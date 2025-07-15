@@ -1,0 +1,15 @@
+<div class="d-flex align-items-center justify-content-between">
+  <h2>Campaign List</h2>
+  <button
+    class="btn addBtn"
+   (click)="openModal()"
+  >
+    Create Scratch And Win!
+  </button>
+</div>
+<app-card-list [items]="campaigns"></app-card-list>
+<div class="d-flex align-items-center justify-content-center">
+  <button (click)="loadMore()" *ngIf="hasNextPage" class="btn loadMore">
+    Load More
+  </button>
+</div>
