@@ -1,63 +1,42 @@
-import { CommonModule } from "@angular/common";
-import { Component, Input } from "@angular/core";
-
+import { CommonModule } from '@angular/common';
+import { Component, Input, Output,EventEmitter } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DeleteDialogComponent } from './delete-dialog.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-card-list',
-  standalone:true,
-  imports: [CommonModule],
-  template:`
-  <div class="card-container">
-  <div class="card" *ngFor="let item of items">
-  <h3>{{item.title}}</h3>
-  <p>Total Participants: {{item.totalParticipants}}</p>
-  <p>Total Reward: {{item.totalReward}}</p>
-  <p>Expiry Date: {{item.expiryDate}}</p>
-  </div>
-  </div>`,
-  styleUrl:'./card-list.component.css'
+  standalone: true,
+  imports: [CommonModule, MatIconModule, MatCardModule, MatDialogModule],
+  templateUrl: './card-list.component.html',
+  styleUrl: './card-list.component.css',
 })
-export class CardListComponent{
-  @Input() items: any[]=[];
-}<!-- scratch-card.component.html -->
-<mat-card class="scratch-card">
-  <!-- Card Header -->
-  <div class="card-header">
-    <div class="card-title">
-      Eid Scratch Gift
-    </div>
-    <button mat-icon-button>
-      <mat-icon>delete</mat-icon>
-    </button>
-  </div>
+export class CardListComponent {
+  @Input() items: any[] = [];
+  @Output() cardDeleted=new EventEmitter<void>();
 
-  <!-- Status -->
-  <div class="status-badge new">New</div>
+  constructor(private dialog: MatDialog,private router:Router) {}
 
-  <!-- Info -->
-  <div class="card-info">
-    <div class="info-item">
-      <mat-icon>event</mat-icon>
-      Exp. 30/09/2025
-    </div>
-    <div class="info-item">
-      <mat-icon>check_circle</mat-icon>
-      Claimed: 2/5
-    </div>
-    <div class="info-item">
-      <mat-icon>card_giftcard</mat-icon>
-      NEONs: 200
-    </div>
-  </div>
+  openConfirmation(Id: number) {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '500px',
+      height: '300px',
+      data: {
+        message: 'Are you sure you want to delete this campaign?',
+        id: Id,
+      },
+    });
 
-  <!-- View Details -->
-  <button mat-stroked-button color="primary" class="view-button">
-    View Details
-  </button>
-</mat-card>
-
-<!-- Create New -->
-<div class="create-wrapper">
-  <button mat-raised-button color="primary">
-    Create Scratch & Win
-  </button>
-</div>
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+       this.cardDeleted.emit();
+      } else {
+        console.log('Action canceled.');
+      }
+    });
+  }
+  viewCampaign(Id:number){
+    this.router.navigate(['/campaign/view',Id]);
+  }
+}

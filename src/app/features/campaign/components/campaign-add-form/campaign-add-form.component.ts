@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
+  FormArray,
+  ValidationErrors,
+  AbstractControl,
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,47 +36,18 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   styleUrl: './campaign-add-form.component.css',
   providers: [provideNativeDateAdapter()],
 })
-export class CampaignAddForm {
-  campaignForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.campaignForm = this.fb.group({
-      title: ['', Validators.required],
-      totalBudget: ['', Validators.required],
-      totalParticipants: ['', Validators.required],
-      distributiontype: ['Auto-calculate', Validators.required],
-      date: ['', Validators.required],
-      rewardType: ['neons', Validators.required],
-    });
-  }
-
-}import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ValidationErrors,
-  Validators
-} from '@angular/forms';
-
-@Component({
-  selector: 'app-create-campaign',
-  templateUrl: './create-campaign.component.html',
-  styleUrls: ['./create-campaign.component.scss']
-})
 export class CreateCampaignComponent implements OnInit {
-  createCampaignForm: FormGroup;
+  createCampaignForm!: FormGroup;
 
   constructor(private fb: FormBuilder) {}
+
 
   ngOnInit(): void {
     this.createCampaignForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(100)]],
       totalReward: [null, [Validators.required, Validators.min(10)]],
       totalParticipants: [null, [Validators.required, Validators.min(1), Validators.max(8)]],
-      distributionType: ['', [Validators.required, this.distributionTypeValidator]],
+      distributionType: ['Auto-calculated'],
       expiryDate: ['', [Validators.required, this.futureDateValidator]],
       rewardTypeId: ['', Validators.required],
       participants: this.fb.array([], [
@@ -83,8 +57,9 @@ export class CreateCampaignComponent implements OnInit {
       ])
     });
 
-    this.addParticipant(); // Add one participant by default if needed
+    this.addParticipant();
   }
+
 
   get participants(): FormArray {
     return this.createCampaignForm.get('participants') as FormArray;
@@ -99,14 +74,6 @@ export class CreateCampaignComponent implements OnInit {
 
   removeParticipant(index: number): void {
     this.participants.removeAt(index);
-  }
-
-  distributionTypeValidator(control: AbstractControl): ValidationErrors | null {
-    const value = control.value;
-    if (value !== 'Custom' && value !== 'Auto-calculated') {
-      return { invalidDistributionType: true };
-    }
-    return null;
   }
 
   futureDateValidator(control: AbstractControl): ValidationErrors | null {
@@ -153,8 +120,8 @@ export class CreateCampaignComponent implements OnInit {
     }
 
     console.log('Form Submitted:', this.createCampaignForm.value);
-    // Call API here
   }
+
 }
 
 

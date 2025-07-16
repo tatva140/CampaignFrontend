@@ -1,0 +1,22 @@
+<nav class="navbar">
+  <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <button (click)="onLogout()">Logout</button>
+</nav>
+
+<mat-sidenav-container [ngClass]="!isCollapsed ? 'sidenav' : 'sidebar'">
+  <mat-sidenav [opened]="isCollapsed">
+    <mat-nav-list>
+      <a routerLink="/campaign" mat-list-item >
+        <div class="d-flex align-items-center justify-content-start">
+          <mat-icon style="font-size: 36px; width: 36px; height: 36px;">house</mat-icon>
+          <span class="ms-2 fs-3" >Dashboard</span>
+        </div>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>
+<main [ngClass]="!isCollapsed ? 'cont' : 'content'" id="main">
+  <router-outlet></router-outlet>
+</main>

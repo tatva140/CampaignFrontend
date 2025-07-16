@@ -1,0 +1,11 @@
+<div mat-dialog-content >
+  <div class="text-center p-2">
+    <img src="delete-316.png" alt="Confirmation Image" height="75px">
+    <h3 class="mt-4">Delete Campaign</h3>
+  </div>
+  <p class="text-center fs-5">{{ data.message }}</p>
+</div>
+<div mat-dialog-actions >
+  <button mat-button mat-dialog-close class="btn me-2">Cancel</button>
+  <button mat-button color="primary" (click)="onConfirm(data.id)" class="btn">Confirm</button>
+</div>

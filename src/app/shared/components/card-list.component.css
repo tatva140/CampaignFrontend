@@ -1,50 +1,28 @@
 .card-container{
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+  grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
   gap:1.5rem;
-  margin-left: 1rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
-.card{
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  padding: 1rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.card:hover{
+.scratch-card:hover{
   transform:translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-.card h3{
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-}
-.card p{
-  margin: 0;
-  color:#555;
-  font-size: 0.95rem;
-  line-height: 1.4;
-}.scratch-card {
+.scratch-card {
   margin: 20px;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.card-title {
-  font-weight: 600;
-  font-size: 1.1rem;
+  background-color: white;
 }
 
 .status-badge {
@@ -53,10 +31,16 @@
   border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 500;
+  width: 20%;
+  text-align: center;
 }
 
 .status-badge.new {
   background-color: #4caf50;
+  color: #fff;
+}
+.status-badge.expired {
+  background-color: grey;
   color: #fff;
 }
 
@@ -73,11 +57,12 @@
   font-size: 0.9rem;
 }
 
-.view-button {
-  align-self: stretch;
+.view {
+  border:2px solid rgba(0,102,167,1);
+  color: rgba(0,102,167,1);
+  border-radius: 5px;
+}
+.h3{
+  word-wrap: break-word;
 }
 
-.create-wrapper {
-  text-align: center;
-  margin: 20px;
-}

@@ -1,0 +1,94 @@
+<div class="container" *ngIf="campaignDetails">
+  <mat-card class="campaign-card">
+    <mat-card-header class="header">
+      <div matCardAvatar class="header-icon">
+        <mat-icon>campaign</mat-icon>
+      </div>
+      <div class="d-flex align-items-center justify-content-between w-100">
+        <div>
+          <mat-card-title class="title">{{
+            campaignDetails.title
+          }}</mat-card-title>
+          <mat-card-subtitle class="mt-2">Campaign Overview</mat-card-subtitle>
+        </div>
+          <div class="status-badge new p-2" *ngIf="!isExpired">Active</div>
+          <div class="status-badge expired p-2" *ngIf="isExpired">Expired</div>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content class="p-4">
+      <div class="details-section">
+        <h3 class="section-title">
+          <mat-icon class="section-icon">info</mat-icon> Details
+        </h3>
+        <div class="details-grid">
+          <div class="detail-item">
+            <span class="label"
+              ><mat-icon class="detail-icon">event</mat-icon> Expiry Date:</span
+            >
+            <span class="value">{{
+              campaignDetails.expiryDate | date : "dd/MM/yyyy"
+            }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label"
+              ><mat-icon class="detail-icon">monetization_on</mat-icon> Total
+              Reward:</span
+            >
+            <span class="value"
+              >{{ campaignDetails.totalReward }}
+              {{ campaignDetails.rewardTypeName }}</span
+            >
+          </div>
+          <div class="detail-item">
+            <span class="label"
+              ><mat-icon class="detail-icon">group</mat-icon> Total
+              Participants:</span
+            >
+            <span class="value">{{ campaignDetails.totalParticipants }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label"
+              ><mat-icon class="detail-icon">share</mat-icon> Distribution
+              Type:</span
+            >
+            <span class="value">{{ campaignDetails.distributionType }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="participants-section mt-3">
+        <h3 class="section-title">
+          <mat-icon class="section-icon">people</mat-icon> Participants
+        </h3>
+        <mat-list class="participants-list mt-2">
+          <mat-list-item
+            *ngFor="let participant of campaignDetails.participants"
+            class="participant-item mb-4"
+          >
+            <div class="participant-details mb-2">
+              <div class="participant-info">
+                <span class="email"
+                  ><mat-icon class="participant-icon">email</mat-icon>
+                  {{ participant.email }}</span
+                >
+                <span class="reward"
+                  ><mat-icon class="participant-icon">attach_money</mat-icon>
+                  Reward: {{ participant.rewardAmount | currency }}</span
+                >
+              </div>
+              <mat-chip-listbox aria-label="Claim Status">
+                <mat-chip
+                  [color]="participant.isClaimed ? 'primary' : 'warn'"
+                  selected
+                >
+                  {{ participant.isClaimed ? "Claimed" : "Unclaimed" }}
+                </mat-chip>
+              </mat-chip-listbox>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

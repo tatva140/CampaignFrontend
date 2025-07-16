@@ -2,20 +2,20 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { CampaignService } from '../../../../shared/services/campaign.service';
 import { CardListComponent } from '../../../../shared/components/card-list.component';
-import { MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
-import { CampaignAddForm } from '../campaign-add-form/campaign-add-form.component';
+import { CreateCampaignComponent } from '../campaign-add-form/campaign-add-form.component';
 
 @Component({
   selector: 'app-campaign-list',
   standalone: true,
-  imports: [CommonModule, CardListComponent,MatDialogModule],
+  imports: [CommonModule, CardListComponent, MatDialogModule],
   templateUrl: './campaign-list.component.html',
   styleUrl: './campaign-list.component.css',
 })
 export class CampaignListComponent {
   campaigns: any[] = [];
-  pageSize = 15;
+  pageSize = 9;
   pageNumber = 1;
   hasNextPage = true;
   constructor(
@@ -24,9 +24,10 @@ export class CampaignListComponent {
   ) {}
 
   ngOnInit() {
-    this.loadMore();
+    this.loadMore(false);
   }
-  loadMore() {
+  loadMore(flag:boolean) {
+    if (flag) {this.pageNumber = 1;this.campaigns=[];}
     this.campaignService
       .getCampaigns(this.pageSize, this.pageNumber)
       .subscribe({
@@ -38,7 +39,8 @@ export class CampaignListComponent {
         error: (err) => console.error(err),
       });
   }
+
   openModal() {
-    this.dialog.open(CampaignAddForm,{ width: '800px'});
+    this.dialog.open(CreateCampaignComponent, { width: '800px' });
   }
 }

@@ -1,0 +1,36 @@
+<div class="card-container">
+  <div *ngFor="let item of items" class="p-0">
+    <mat-card class="scratch-card">
+      <div class="card-header p-0">
+        <h3>{{ item.title }}</h3>
+        <button
+          mat-icon-button
+          class="btn"
+          title="Delete"
+          [disabled]="item.isExpired"
+          (click)="openConfirmation(item.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <div class="status-badge new" *ngIf="!item.isExpired">Active</div>
+      <div class="status-badge expired" *ngIf="item.isExpired">Expired</div>
+      <div class="card-info">
+        <div class="info-item">
+          <mat-icon>event</mat-icon>
+          Exp. {{ item.expiryDate | date : "dd/MM/yyyy" }}
+        </div>
+        <div class="info-item">
+          <mat-icon>check_circle</mat-icon>
+          Claimed: {{ item.claimedCount }}/{{ item.totalParticipants }}
+        </div>
+        <div class="info-item">
+          <mat-icon>card_giftcard</mat-icon>
+          NEONS: {{ item.totalReward }}
+        </div>
+      </div>
+
+      <button mat-stroked-button class="btn view" (click)="viewCampaign(item.id)">View Details</button>
+    </mat-card>
+  </div>
+</div>

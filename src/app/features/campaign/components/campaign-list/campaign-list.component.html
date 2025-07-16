@@ -7,9 +7,9 @@
     Create Scratch And Win!
   </button>
 </div>
-<app-card-list [items]="campaigns"></app-card-list>
+<app-card-list [items]="campaigns" (cardDeleted)="loadMore(true)"></app-card-list>
 <div class="d-flex align-items-center justify-content-center">
-  <button (click)="loadMore()" *ngIf="hasNextPage" class="btn loadMore">
+  <button (click)="loadMore(false)" *ngIf="hasNextPage" class="btn loadMore">
     Load More
   </button>
 </div>

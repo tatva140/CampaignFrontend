@@ -1,119 +1,90 @@
-<h2 mat-dialog-title>Create Campaign</h2>
-<mat-dialog-content>
-  <form [formGroup]="campaignForm">
-    <mat-form-field class="full-width" appearance="fill">
+<h2 mat-dialog-title >Create Campaign</h2>
+<mat-dialog-content >
+  <form [formGroup]="createCampaignForm" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline" class="full-width mt-4">
       <mat-label>Title</mat-label>
-      <input matInput formControlName="title">
+      <input matInput formControlName="title" />
+      <mat-error *ngIf="createCampaignForm.get('title')?.hasError('required')">
+        Title is required.
+      </mat-error>
+      <mat-error *ngIf="createCampaignForm.get('title')?.hasError('maxlength')">
+        Maximum length is 100 characters.
+      </mat-error>
     </mat-form-field>
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Total Reward Budget</mat-label>
-      <input matInput formControlName="totalBudget" type="number" min="10">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Total Reward</mat-label>
+      <input matInput type="number" formControlName="totalReward" />
+      <mat-error
+        *ngIf="createCampaignForm.get('totalReward')?.hasError('required')"
+      >
+        Total reward is required.
+      </mat-error>
+      <mat-error *ngIf="createCampaignForm.get('totalReward')?.hasError('min')">
+        Minimum reward must be at least 10.
+      </mat-error>
     </mat-form-field>
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Number of Participants</mat-label>
-      <input matInput formControlName="totalParticipants" type="number" min="1" max="9">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Total Participants</mat-label>
+      <input matInput type="number" formControlName="totalParticipants" />
+      <mat-error
+        *ngIf="
+          createCampaignForm.get('totalParticipants')?.hasError('required')
+        "
+      >
+        Required.
+      </mat-error>
+      <mat-error
+        *ngIf="createCampaignForm.get('totalParticipants')?.hasError('min')"
+      >
+        Must be at least 1.
+      </mat-error>
+      <mat-error
+        *ngIf="createCampaignForm.get('totalParticipants')?.hasError('max')"
+      >
+        Maximum 8 allowed.
+      </mat-error>
     </mat-form-field>
-    <mat-radio-group formControlName="distributiontype" class="full-width">
+
+    <mat-radio-group formControlName="distributionType" class="full-width">
       <mat-label>Distribution Type</mat-label>
-      <mat-radio-button value="Auto-calculate">Auto-calculate</mat-radio-button>
+      <mat-radio-button value="Auto-calculated"
+        >Auto-calculated</mat-radio-button
+      >
       <mat-radio-button value="Custom">Custom</mat-radio-button>
     </mat-radio-group>
-    <mat-form-field class="full-width" appearance="fill">
+
+    <mat-form-field appearance="outline" class="full-width">
       <mat-label>Expiry Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="date">
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <input matInput [matDatepicker]="picker" formControlName="expiryDate" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error
+        *ngIf="createCampaignForm.get('expiryDate')?.hasError('required')"
+      >
+        Required.
+      </mat-error>
+      <mat-error
+        *ngIf="
+          createCampaignForm.get('expiryDate')?.hasError('invalidExpiryDate')
+        "
+      >
+        Must be a future date.
+      </mat-error>
     </mat-form-field>
-    <mat-form-field class="full-width" appearance="fill">
+
+    <mat-form-field appearance="outline" class="full-width">
       <mat-label>Reward Type</mat-label>
-      <mat-select formControlName="rewardType">
-        <mat-option value="neons" selected>Neons</mat-option>
-      </mat-select>
+      <input matInput formControlName="rewardTypeId" />
+      <mat-error
+        *ngIf="createCampaignForm.get('rewardTypeId')?.hasError('required')"
+      >
+        Required.
+      </mat-error>
     </mat-form-field>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="primary" >Submit</button>
-</mat-dialog-actions>
-<form [formGroup]="createCampaignForm" (ngSubmit)="submit()">
 
-  <!-- Title -->
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Title</mat-label>
-    <input matInput formControlName="title" />
-    <mat-error *ngIf="createCampaignForm.get('title')?.hasError('required')">
-      Title is required.
-    </mat-error>
-    <mat-error *ngIf="createCampaignForm.get('title')?.hasError('maxlength')">
-      Maximum length is 100 characters.
-    </mat-error>
-  </mat-form-field>
-
-  <!-- Total Reward -->
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Total Reward</mat-label>
-    <input matInput type="number" formControlName="totalReward" />
-    <mat-error *ngIf="createCampaignForm.get('totalReward')?.hasError('required')">
-      Total reward is required.
-    </mat-error>
-    <mat-error *ngIf="createCampaignForm.get('totalReward')?.hasError('min')">
-      Minimum reward must be at least 10.
-    </mat-error>
-  </mat-form-field>
-
-  <!-- Total Participants -->
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Total Participants</mat-label>
-    <input matInput type="number" formControlName="totalParticipants" />
-    <mat-error *ngIf="createCampaignForm.get('totalParticipants')?.hasError('required')">
-      Required.
-    </mat-error>
-    <mat-error *ngIf="createCampaignForm.get('totalParticipants')?.hasError('min')">
-      Must be at least 1.
-    </mat-error>
-    <mat-error *ngIf="createCampaignForm.get('totalParticipants')?.hasError('max')">
-      Maximum 8 allowed.
-    </mat-error>
-  </mat-form-field>
-
-  <!-- Distribution Type -->
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Distribution Type</mat-label>
-    <input matInput formControlName="distributionType" placeholder="Custom or Auto-calculated" />
-    <mat-error *ngIf="createCampaignForm.get('distributionType')?.hasError('required')">
-      Required.
-    </mat-error>
-    <mat-error *ngIf="createCampaignForm.get('distributionType')?.hasError('invalidDistributionType')">
-      Must be 'Custom' or 'Auto-calculated'.
-    </mat-error>
-  </mat-form-field>
-
-  <!-- Expiry Date -->
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Expiry Date</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="expiryDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-error *ngIf="createCampaignForm.get('expiryDate')?.hasError('required')">
-      Required.
-    </mat-error>
-    <mat-error *ngIf="createCampaignForm.get('expiryDate')?.hasError('invalidExpiryDate')">
-      Must be a future date.
-    </mat-error>
-  </mat-form-field>
-
-  <!-- Reward Type ID -->
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Reward Type ID</mat-label>
-    <input matInput formControlName="rewardTypeId" />
-    <mat-error *ngIf="createCampaignForm.get('rewardTypeId')?.hasError('required')">
-      Required.
-    </mat-error>
-  </mat-form-field>
-
-  <!-- Participants -->
-  <div formArrayName="participants">
+    <!-- <div formArrayName="participants">
     <h3>Participants</h3>
 
     <div *ngFor="let participant of participants.controls; let i = index" [formGroupName]="i" class="participant-item">
@@ -162,11 +133,10 @@
       Total participant rewards must equal Total Reward.
     </mat-error>
 
-  </div>
-
-  <button mat-raised-button color="accent" type="submit">
-    Submit Campaign
-  </button>
-
-</form>
-
+  </div> -->
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-raised-button color="primary">Submit</button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
