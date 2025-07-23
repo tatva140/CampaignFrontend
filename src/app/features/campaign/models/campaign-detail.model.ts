@@ -11,5 +11,6 @@ export interface CampaignDetailModel {
 export interface ParticipantListModel {
   email: string;
   isClaimed: boolean;
+  isRegistered: boolean;
   rewardAmount: number;
 }

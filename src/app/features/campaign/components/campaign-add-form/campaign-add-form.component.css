@@ -1,4 +1,12 @@
 .full-width{
   width: 100%;
-  gap: 16px;
+  margin-bottom: 10px;
+}
+.card-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }

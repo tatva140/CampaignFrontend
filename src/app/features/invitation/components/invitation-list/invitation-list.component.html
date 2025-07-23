@@ -1,0 +1,9 @@
+<div>
+  <h2>Invitations</h2>
+</div>
+<app-invitation-card [items]="invitations"></app-invitation-card>
+<div class="d-flex align-items-center justify-content-center ">
+  <button (click)="loadMore(false)" *ngIf="hasNextPage" class="btn loadMore mb-5">
+    Load More
+  </button>
+</div>

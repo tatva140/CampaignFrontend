@@ -4,12 +4,12 @@
     class="btn addBtn"
    (click)="openModal()"
   >
-    Create Scratch And Win!
+    Create Campaign
   </button>
 </div>
 <app-card-list [items]="campaigns" (cardDeleted)="loadMore(true)"></app-card-list>
-<div class="d-flex align-items-center justify-content-center">
-  <button (click)="loadMore(false)" *ngIf="hasNextPage" class="btn loadMore">
+<div class="d-flex align-items-center justify-content-center ">
+  <button (click)="loadMore(false)" *ngIf="hasNextPage" class="btn loadMore mb-5">
     Load More
   </button>
 </div>

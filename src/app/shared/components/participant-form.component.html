@@ -1,0 +1,38 @@
+<div class="card-container m-4">
+<form [formGroup]="form" class="p-3" >
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Email </mat-label>
+    <input matInput formControlName="email" (blur)="checkIsUserRegistred(form.get('email')?.value)"/>
+    <mat-error *ngIf="form.get('email')?.hasError('required')" class="m-0 p-0" >
+      Email is required.
+    </mat-error>
+    <mat-error *ngIf="form.get('email')?.hasError('pattern')" class="m-0 p-0">
+      Invalid Email.
+    </mat-error>
+  </mat-form-field>
+  <mat-error *ngIf="isRegistered && form.get('email')?.valid && form.get('email')?.value" class="error mb-3 p-0">
+    Registered User
+  </mat-error>
+    <mat-error class="error m-0 p-0"  *ngIf="!isRegistered && form.get('email')?.valid && form.get('email')?.value" >
+      Not a Registered User
+    </mat-error>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Reward Amount </mat-label>
+    <input matInput formControlName="rewardAmount" type="number" />
+    <mat-error
+      *ngIf="form.get('rewardAmount')?.hasError('required')"
+      class="m-0 p-0"
+    >
+      Reward Amount is required.
+    </mat-error>
+    <mat-error class="m-0 p-0"
+        *ngIf="form.get('rewardAmount')?.hasError('min')"
+        >
+          Reward Amount should be minimum 1.
+        </mat-error>
+  </mat-form-field>
+
+</form>
+</div>
+

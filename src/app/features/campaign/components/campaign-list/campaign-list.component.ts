@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CampaignService } from '../../../../shared/services/campaign.service';
 import { CardListComponent } from '../../../../shared/components/card-list.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
-import { CreateCampaignComponent } from '../campaign-add-form/campaign-add-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-campaign-list',
@@ -15,19 +15,22 @@ import { CreateCampaignComponent } from '../campaign-add-form/campaign-add-form.
 })
 export class CampaignListComponent {
   campaigns: any[] = [];
-  pageSize = 9;
+  pageSize = 6;
   pageNumber = 1;
   hasNextPage = true;
   constructor(
     private campaignService: CampaignService,
-    private dialog: MatDialog
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.loadMore(false);
   }
-  loadMore(flag:boolean) {
-    if (flag) {this.pageNumber = 1;this.campaigns=[];}
+  loadMore(flag: boolean) {
+    if (flag) {
+      this.pageNumber = 1;
+      this.campaigns = [];
+    }
     this.campaignService
       .getCampaigns(this.pageSize, this.pageNumber)
       .subscribe({
@@ -41,6 +44,6 @@ export class CampaignListComponent {
   }
 
   openModal() {
-    this.dialog.open(CreateCampaignComponent, { width: '800px' });
+    this.router.navigate(['/campaign/add']);
   }
 }

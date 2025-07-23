@@ -7,7 +7,7 @@
           mat-icon-button
           class="btn"
           title="Delete"
-          [disabled]="item.isExpired"
+          [disabled]="item.isExpired || item.claimedCount>0"
           (click)="openConfirmation(item.id)"
         >
           <mat-icon>delete</mat-icon>

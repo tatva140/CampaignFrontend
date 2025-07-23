@@ -1,7 +1,7 @@
-export interface ResponseModel{
+export interface RewardResponse{
   message :string
    success :boolean
    status :boolean
-   data :number
+   data :number[]
    statusCode :number
 }

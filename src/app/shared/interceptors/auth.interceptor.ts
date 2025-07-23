@@ -1,5 +1,5 @@
 import { LocalStorageService } from '../services/localstorage.service';
-import { Injectable, inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const AuthInterceptor: HttpInterceptorFn = (req, next) => {

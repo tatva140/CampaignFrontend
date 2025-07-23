@@ -1,0 +1,26 @@
+<div class="card-container">
+  <div *ngFor="let item of items" class="p-0">
+    <mat-card class="scratch-card">
+      <div class="card-header p-0">
+        <div class="d-flex align-items-center justify-content-between w-100">
+        <div>
+          <h3>{{ item.title }}</h3>
+          <p *ngIf="!item.isExpired" style="color:orange">Expiry: {{ item.expiryDate | date : "dd/MM/yyyy" }}</p>
+          <p *ngIf="item.isExpired" class="text-muted">Expired</p>
+        </div>
+        <div>
+        <div style="color:#04676e">{{ item.totalReward }} NEONS</div>
+        <p *ngIf="!item.isClaimed" class="mt-2"><a style="cursor: pointer;color:#04676e;"><strong>TAP TO PLAY!</strong></a></p>
+      </div>
+      </div>
+    </div>
+      <br style="text-decoration: dashed;">
+      <h4 style="text-decoration-line: underline;color:#04676e">From:</h4>
+      <div class="d-flex align-items-center justify-content-between">
+        <p style="color:#04676e">{{ item.createdBy }}</p>
+        <p class="status-badge new" *ngIf="item.isClaimed">0 Scratch</p>
+        <p class="status-badge new" *ngIf="!item.isClaimed">1 Scratch</p>
+      </div>
+    </mat-card>
+  </div>
+</div>

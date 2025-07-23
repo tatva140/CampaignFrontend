@@ -40,4 +40,5 @@ export class LocalStorageService {
       console.error('Error clearing localStorage', e);
     }
   }
+
 }

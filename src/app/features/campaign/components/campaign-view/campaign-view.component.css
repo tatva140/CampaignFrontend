@@ -1,7 +1,7 @@
-.container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 0 16px;
+.card-container{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 1.5rem;
 }
 
 .campaign-card {
@@ -26,13 +26,13 @@
   font-size: 32px;
   height: 32px;
   width: 32px;
-  color: #1a237e;
+  color: rgba(0,102,167,1);;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 500;
-  color: #1a237e;
+  color: rgba(0,102,167,1);;
 }
 
 .section-title {
@@ -180,4 +180,10 @@
   background-color: grey;
   color: #fff;
   font-size: 15px;
+}
+h2{
+  margin:1rem;
+  color:rgba(0,102,167,1);
+  margin-top: 2rem;
+
 }

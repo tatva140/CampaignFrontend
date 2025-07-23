@@ -1,17 +1,30 @@
 <nav class="navbar">
-  <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
-    <mat-icon>menu</mat-icon>
-  </button>
+  <div class="d-flex align-items-center justify-content-start">
+    <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span style="font-size: 30px; font-weight: 500" class="ms-3">Scratch And Win</span>
+  </div>
   <button (click)="onLogout()">Logout</button>
 </nav>
 
 <mat-sidenav-container [ngClass]="!isCollapsed ? 'sidenav' : 'sidebar'">
   <mat-sidenav [opened]="isCollapsed">
     <mat-nav-list>
-      <a routerLink="/campaign" mat-list-item >
+      <a routerLink="/campaign" mat-list-item>
         <div class="d-flex align-items-center justify-content-start">
-          <mat-icon style="font-size: 36px; width: 36px; height: 36px;">house</mat-icon>
-          <span class="ms-2 fs-3" >Dashboard</span>
+          <mat-icon style="font-size: 30px; width: 30px; height: 30px"
+            >campaign</mat-icon
+          >
+          <span class="ms-1 fs-4">Campaigns</span>
+        </div>
+      </a>
+      <a routerLink="/invitation" mat-list-item>
+        <div class="d-flex align-items-center justify-content-start">
+          <mat-icon style="font-size: 30px; width: 30px; height: 30px"
+            >link</mat-icon
+          >
+          <span class="ms-1 fs-4">Invitations</span>
         </div>
       </a>
     </mat-nav-list>
