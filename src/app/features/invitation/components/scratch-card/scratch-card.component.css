@@ -1,0 +1,95 @@
+
+.scratch-info {
+  padding: 20px;
+  background: linear-gradient(to right, #f9fcff, #e9f4ff);
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.1);
+}
+
+.scratch-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.scratch-subtitle {
+  font-size: 22px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 40px;
+}
+
+.scratch-description {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #333;
+  background: rgba(0, 123, 255, 0.05);
+  padding: 20px;
+  border-radius: 15px;
+}
+.scratch-game-section {
+  background: linear-gradient(145deg, #f3faff, #e6f7ff);
+  border-radius: 20px;
+}
+
+.scratch-info {
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.05);
+}
+
+.scratch-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #007bff;
+}
+
+.scratch-subtitle {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #444;
+}
+
+.how-it-works {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 20px;
+  color: #333;
+}
+
+.scratch-description {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-top: 10px;
+  background: rgba(0, 123, 255, 0.05);
+  padding: 20px;
+  border-radius: 15px;
+  color: #333;
+}
+
+.scratch-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+
+}
+
+.scratch-card {
+  width: 100%;
+  max-width: 120px;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  background: url('/assets/scratch.webp') no-repeat center center;
+  background-size: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
+}
+
+.scratch-card:hover {
+  transform: scale(1.05);
+}
+

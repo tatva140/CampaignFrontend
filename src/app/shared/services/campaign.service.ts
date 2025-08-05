@@ -5,6 +5,9 @@ import { ResponseModel } from '../../features/campaign/models/campaign-delete.mo
 import { CampaignDetailModel } from '../../features/campaign/models/campaign-detail.model';
 import { RewardTypesModel } from '../../features/campaign/models/reward-types.model';
 import { RewardResponse } from '../../features/campaign/models/reward-response.model';
+import { jwtDecode } from 'jwt-decode';
+import { DecodedToken } from '../../features/campaign/models/token.model';
+import { NotificationsModel } from '../layouts/notification.model';
 
 @Injectable({
   providedIn: 'root',
@@ -55,4 +58,24 @@ export class CampaignService {
     );
     return response;
   }
+  getOwnEmail(){
+    const token:DecodedToken= jwtDecode(localStorage.getItem('Token') || '');
+    return token.email;
+  }
+  sendInvite(id:number, email : string, title:string){
+    const response = this.http.post<ResponseModel>(
+      `${this.apiUrl}campaign/send-invite`, {
+        id,
+        email,
+        title
+      }
+    );
+    return response;
+  }
+  loadNotifications()
+  {
+    const response = this.http.get<NotificationsModel[]>(`${this.apiUrl}user/notifications`);
+    return response;
+  }
+
 }

@@ -61,7 +61,7 @@ export class CreateCampaignComponent implements OnInit {
 
   ngOnInit(): void {
     this.createCampaignForm = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(50)]],
+      title: ['', [Validators.required, Validators.maxLength(50),this.notNullValidator]],
       totalReward: [
         null,
         [Validators.required, Validators.min(10), this.hasEnoughBudget],
@@ -97,6 +97,7 @@ export class CreateCampaignComponent implements OnInit {
             [
               Validators.required,
               Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+              this.validateOwnEmail.bind(this),
             ],
           ],
           rewardAmount: ['', [Validators.required, Validators.min(1)]],
@@ -130,6 +131,12 @@ export class CreateCampaignComponent implements OnInit {
   }
   goBack(): void {
     this.location.back();
+  }
+  notNullValidator(control: any): { [key: string]: boolean } | null {
+    if (control.value && control.value.trim() === '') {
+      return { notNull: true };
+    }
+    return null;
   }
   futureDateValidator(control: AbstractControl): ValidationErrors | null {
     const inputDate = new Date(control.value);
@@ -188,6 +195,13 @@ export class CreateCampaignComponent implements OnInit {
 
     return null;
   };
+  validateOwnEmail= (control: AbstractControl): ValidationErrors | null => {
+    const ownEmail = this.campaignService.getOwnEmail();
+    if (control.value && control.value.toLowerCase() === ownEmail) {
+      return { ownEmail: true };
+    }
+    return null;
+  }
   next(): void {
     if (this.createCampaignForm.invalid) {
       this.createCampaignForm.markAllAsTouched();

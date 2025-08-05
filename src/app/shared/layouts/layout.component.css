@@ -57,3 +57,14 @@ button {
   margin-right: 15px;
   z-index: 0;
 }
+.logoutBtn{
+  display: none;
+}
+@media (max-width: 460px) {
+  .logoutBtn{
+    display: inline;
+  }
+  .logout{
+    display: none;
+  }
+}

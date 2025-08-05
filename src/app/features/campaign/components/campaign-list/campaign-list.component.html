@@ -1,5 +1,7 @@
 <div class="d-flex align-items-center justify-content-between">
   <h2>Campaign List</h2>
+
+  <div *ngIf="campaigns.length!=0">
   <button
     class="btn addBtn"
    (click)="openModal()"
@@ -7,7 +9,18 @@
     Create Campaign
   </button>
 </div>
-<app-card-list [items]="campaigns" (cardDeleted)="loadMore(true)"></app-card-list>
+</div>
+<div *ngIf="campaigns.length==0" class="text-center mt-5">
+  <i class="fas fa-calendar-times mt-5 mb-3" style="font-size: 50px;"></i>
+  <h3 style="color: #495057; margin-bottom:1.5rem;">No Campaigns Found</h3>
+  <h5 style="margin-bottom: 1.5rem;">We couldn't find any campaigns.<br> Try adding some!</h5>
+  <button class="btn"
+          (click)="openModal()"
+          style="background: #0066a7; color: white; border: none; border-radius: 8px; ">
+      Create Campaign
+  </button>
+</div>
+<app-card-list [items]="campaigns" (cardDeleted)="loadMore(true)" ></app-card-list>
 <div class="d-flex align-items-center justify-content-center ">
   <button (click)="loadMore(false)" *ngIf="hasNextPage" class="btn loadMore mb-5">
     Load More

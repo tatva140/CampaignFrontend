@@ -1,0 +1,23 @@
+<div mat-dialog-content>
+  <div class="text-center p-2">
+    <h3 class="mt-4">Loyalty Points</h3>
+    <h4>{{ data.item.points }}</h4>
+    <h4>{{ data.item.date | date : "EEEE, MMMM d, y - hh:mma " }}</h4>
+  </div>
+  <mat-card class="p-2 mt-4">
+    <mat-card-content>
+      <div
+        class="d-flex flex-column align-items-start justify-content-between w-100 p-2 gap-3"
+      >
+        <div>
+          <h4>Transaction Type</h4>
+          <h6>Scratch & win</h6>
+        </div>
+        <div>
+          <h4>Description</h4>
+          <h6>{{ data.item.description }}</h6>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

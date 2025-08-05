@@ -4,6 +4,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { GuestGuard } from '../../shared/guards/guest.guard';
 
 export const authRoutes: Routes = [
-  { path: 'login', component: LoginComponent ,canActivate:[GuestGuard]},
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, canActivate: [GuestGuard] },
+  { path: 'register/:id', component: RegisterComponent },
 ];

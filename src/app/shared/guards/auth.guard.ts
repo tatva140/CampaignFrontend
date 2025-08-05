@@ -8,11 +8,11 @@ import { LocalStorageService } from '../services/localstorage.service';
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
-    private localStorage: LocalStorageService
+    private localStorageService: LocalStorageService
   ) {}
 
   canActivate(): boolean | UrlTree {
-    const token = this.localStorage.getItem();
+    const token = this.localStorageService.getItem();
     if (token) {
       return true;
     }

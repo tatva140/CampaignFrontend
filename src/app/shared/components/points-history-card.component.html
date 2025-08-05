@@ -1,0 +1,23 @@
+<div *ngIf="items.length == 0" class="text-center mt-5 p-0">
+  <i class="fas fa-calendar-times mt-5 mb-3" style="font-size: 50px"></i>
+  <h4 style="color: #495057; margin-bottom: 1.5rem">No Points History Found</h4>
+
+</div>
+<div *ngFor="let item of items" class="card-container p-0 ms-0 ms-md-5">
+<div class="row p-0">
+  <div class="col-md-6 col-12 p-0">
+    <mat-card class="scratch-card p-2" (click)="viewDetails(item)">
+      <div class="card-header">
+        <span class="date">{{ item.date | date: "dd/MM/yyyy"}}</span>
+      </div>
+      <mat-card-content class="p-0">
+        <div class="d-flex align-items-center justify-content-between w-100 p-2 mt-2 ">
+          <span>{{ item.campaignName }}</span>
+          <span class="points" *ngIf="item.event=='CampaignCreate'" style="color: red;">- {{ item.points }} Points</span>
+          <span class="points" *ngIf="item.event!='CampaignCreate'" style="color: green;">+ {{ item.points }} Points</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+</div>

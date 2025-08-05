@@ -30,7 +30,6 @@ export class InvitationListComponent {
       .getInvitations(this.pageSize, this.pageNumber)
       .subscribe({
         next: (data) => {
-          console.log(data);
           this.invitations.push(...data.items);
           this.pageNumber += 1;
           this.hasNextPage = data.hasNextPage;

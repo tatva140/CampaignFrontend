@@ -9,8 +9,8 @@
           <p *ngIf="item.isExpired" class="text-muted">Expired</p>
         </div>
         <div>
-        <div style="color:#04676e">{{ item.totalReward }} NEONS</div>
-        <p *ngIf="!item.isClaimed" class="mt-2"><a style="cursor: pointer;color:#04676e;"><strong>TAP TO PLAY!</strong></a></p>
+        <div style="color:#04676e" *ngIf="item.isClaimed">{{ item.totalReward }} NEONS</div>
+        <p *ngIf="!item.isClaimed && !item.isExpired && !item.isDeleted" class="mt-2"><strong style="cursor: pointer;color:#04676e;" (click)="openModal(item.createdBy,item.id)">TAP TO PLAY!</strong></p>
       </div>
       </div>
     </div>

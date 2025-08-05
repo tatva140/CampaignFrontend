@@ -1,0 +1,35 @@
+<div mat-dialog-content>
+  <div class="text-center p-2">
+    <h2 class="mt-4">Scratch & Win Invitation</h2>
+  </div>
+  <strong class="fs-6 mb-2">Recepient</strong>
+  <div style="border: 1px solid black; border-radius: 10px" class="p-2 mb-4">
+    <p>{{ data.email }}</p>
+  </div>
+  <strong class="fs-6 mb-2">Message Preview</strong>
+  <div style="border: 1px solid black; border-radius: 10px" class="p-2 mb-4">
+    <p>
+      'Your friend sent you a Scratch & Win gift🎁!
+      <br />
+      Tap the link below to register and reveal your reward.'
+    </p>
+  </div>
+  <div class="d-flex align-items-top justify-content-start gap-2">
+    <p><mat-icon>info</mat-icon></p>
+    <p class="mb-4">
+      Once the recepient registers with this link <br />
+      they'll automatically be routed to the campaign page!
+    </p>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-button
+    color="primary"
+    (click)="onConfirm(data.id)"
+    class="btn w-100 mb-3"
+    style="background-color: black; color: white;border-radius: 15px;"
+  >
+    Send
+  </button>
+</div>

@@ -9,6 +9,9 @@
     <mat-error *ngIf="form.get('email')?.hasError('pattern')" class="m-0 p-0">
       Invalid Email.
     </mat-error>
+    <mat-error *ngIf="form.get('email')?.hasError('ownEmail')" class="m-0 p-0">
+      You cannot add yourself as a participant.
+    </mat-error>
   </mat-form-field>
   <mat-error *ngIf="isRegistered && form.get('email')?.valid && form.get('email')?.value" class="error mb-3 p-0">
     Registered User

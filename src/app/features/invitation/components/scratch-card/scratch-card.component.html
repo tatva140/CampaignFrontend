@@ -1,0 +1,71 @@
+<div class="m-5">
+  <div class="d-flex align-items-center justify-content-start">
+    <mat-icon
+      style="
+        font-size: 36px;
+        width: 36px;
+        height: 36px;
+        cursor: pointer;
+        color: rgba(0, 102, 167, 1);
+      "
+      class="ms-3"
+      (click)="goBack()"
+      >arrow_back</mat-icon
+    >
+    <span
+      style="font-size: 30px; font-weight: 500; color: rgba(0, 102, 167, 1)"
+      class="ms-2 "
+      >NEO GAMES</span
+    >
+  </div>
+  <div class="row m-5 gap-5">
+    <div class="col-xl-5 col-12 scratch-info">
+      <h4 class="scratch-subtitle">Scratch to reveal your luck!</h4>
+      <h5 class="how-it-works">How it works?</h5>
+      <p class="scratch-description">
+        🎉 <strong>Scratch & Win!</strong> 🎉 Someone special sent you a surprise! Just scratch
+        the card to reveal your gift. It's quick, fun, and made just for you. 🎁
+        <br /><br />
+        Let the fun begin! ✨
+      </p>
+    </div>
+    <div *ngIf="!canClaimReward">
+      <h3>
+        Oops! Something went wrong!
+      </h3>
+    </div>
+    <div *ngIf="isExpired">
+      <h3>
+        Scratch & Win Expired!
+      </h3>
+      <h4>This reward is no longer available, the campaign is already expired.</h4>
+    </div>
+    <div *ngIf="isDeleted">
+      <h3>
+        Campaign is deleted
+      </h3>
+      <h4>This campaign was deleted by the creator.</h4>
+    </div>
+
+    <div class="col-xl-6 col-12" *ngIf="!isDeleted && !isExpired">
+        <div class="scratch-cards-container">
+          <div
+            class="scratch-card"
+            *ngFor="let card of cards"
+          >
+          <div *ngIf="!card.isClaimed">
+            <div [id]="card.id">
+            </div>
+          </div>
+          <div *ngIf="card.isClaimed">
+            <div class="d-flex flex-column align-items-center justify-content-center mt-4">
+              <span>{{card.rewardText}}</span>
+              <span> NEONS</span>
+            </div>
+          </div>
+        </div>
+        </div>
+    </div>
+
+  </div>
+</div>

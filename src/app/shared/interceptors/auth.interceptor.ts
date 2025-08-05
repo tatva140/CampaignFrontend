@@ -3,11 +3,11 @@ import { inject } from '@angular/core';
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
-  const localstorage = inject(LocalStorageService);
+  const localStorageService = inject(LocalStorageService);
   if (req.url.includes('/auth/login') || req.url.includes('/auth/register')) {
     return next(req);
   }
-  const token =localstorage.getItem();
+  const token =localStorageService.getItem();
   if(token){
     const cloned= req.clone({
       setHeaders:{

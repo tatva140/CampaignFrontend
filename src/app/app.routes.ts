@@ -5,6 +5,8 @@ import { CampaignListComponent } from './features/campaign/components/campaign-l
 import { CampaignViewComponent } from './features/campaign/components/campaign-view/campaign-view.component';
 import { CreateCampaignComponent } from './features/campaign/components/campaign-add-form/campaign-add-form.component';
 import { InvitationListComponent } from './features/invitation/components/invitation-list/invitation-list.component';
+import { ScratchCardComponent } from './features/invitation/components/scratch-card/scratch-card.component';
+import { PointsHistoryComponent } from './features/history/components/points-history/points-history.component';
 
 export const routes: Routes = [
   {
@@ -45,6 +47,22 @@ export const routes: Routes = [
       {
         path: '',
         component: InvitationListComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'scratch-card/:id',
+        component: ScratchCardComponent,
+        canActivate: [AuthGuard],
+      }
+    ],
+  },
+  {
+    path: 'history',
+    component: NavbarComponent,
+    children: [
+      {
+        path: '',
+        component: PointsHistoryComponent,
         canActivate: [AuthGuard],
       }
     ],

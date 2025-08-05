@@ -1,4 +1,4 @@
-<div class="m-5">
+<div class="m-md-5 m-2">
   <div class="d-flex align-items-center justify-content-start">
     <mat-icon
       style="
@@ -26,6 +26,12 @@
           <input matInput formControlName="title" />
           <mat-error
             *ngIf="createCampaignForm.get('title')?.hasError('required')"
+            class="m-0 p-0"
+          >
+            Title is required.
+          </mat-error>
+          <mat-error
+            *ngIf="createCampaignForm.get('title')?.hasError('notNull')"
             class="m-0 p-0"
           >
             Title is required.

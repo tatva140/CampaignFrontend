@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input,  } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { RedeemNowDialog } from './redeemnow-dialog.component';
 @Component({
   selector: 'app-invitation-card',
   standalone: true,
@@ -11,6 +13,15 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class InvitationCardComponent {
   @Input() items: any[] = [];
-
-
+  constructor(private dialog: MatDialog) {}
+  openModal(createdBy: string, id:number) {
+    this.dialog.open(RedeemNowDialog, {
+      width: '450px',
+      height: '300px',
+      data: {
+        createdBy: createdBy,
+        id: id,
+      },
+    });
+  }
 }

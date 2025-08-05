@@ -1,1 +1,140 @@
-<p>register works!</p>
+<div class="container">
+  <div
+    class="d-flex align-items-center justify-content-center vh-100 overflow-hidden"
+  >
+    <div
+      class="row shadow"
+      style="width: 50%; height: auto; background-color: white"
+    >
+      <div class="col-md-12 d-flex align-items-center justify-content-center">
+        <div class="w-100">
+          <div
+            class="d-flex overflow-hidden align-items-center justify-content-center w-auto "
+          >
+            <h2 style="color: rgba(0, 102, 167, 1)" class="mt-3">Register</h2>
+          </div>
+          <div class="row align-items-center justify-content-center p-0">
+            <h3 class="mt-3 w-75" style="color: rgba(0, 102, 167, 1)">
+              Welcome,
+            </h3>
+            <form
+              class="w-75 mb-5"
+              [formGroup]="registerForm"
+              (ngSubmit)="onRegister()"
+            >
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" />
+                <mat-error
+                  *ngIf="registerForm.get('name')?.hasError('required')"
+                  class="m-0 p-0"
+                >
+                  Name is required.
+                </mat-error>
+                <mat-error
+                  *ngIf="registerForm.get('name')?.hasError('notNull')"
+                  class="m-0 p-0"
+                >
+                  Name is required.
+                </mat-error>
+                <mat-error
+                  *ngIf="registerForm.get('name')?.hasError('maxlength')"
+                  class="m-0 p-0"
+                >
+                  Name can be maximum 50 characters long.
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" />
+                <mat-error
+                  *ngIf="registerForm.get('email')?.hasError('required')"
+                  class="m-0 p-0"
+                >
+                  Email is required.
+                </mat-error>
+                <mat-error
+                  *ngIf="registerForm.get('email')?.hasError('pattern')"
+                  class="m-0 p-0"
+                >
+                  Invalid email address.
+                </mat-error>
+                <mat-error
+                  *ngIf="registerForm.get('email')?.hasError('duplicateEmail')"
+                  class="m-0 p-0"
+                >
+                  Email already exists.
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" />
+                <mat-error
+                  *ngIf="registerForm.get('password')?.hasError('required')"
+                  class="m-0 p-0"
+                >
+                  Password is required.
+                </mat-error>
+                <mat-error
+                  *ngIf="registerForm.get('password')?.hasError('pattern')"
+                  class="mb-5 p-0"
+                >
+                  Password must contain at least 8 characters, including
+                  uppercase, lowercase, numbers, and special characters.
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Phone</mat-label>
+                <input matInput formControlName="phone" />
+                <mat-error
+                  *ngIf="registerForm.get('phone')?.hasError('required')"
+                  class="m-0 p-0"
+                >
+                  Phone number is required.
+                </mat-error>
+                <mat-error
+                  *ngIf="registerForm.get('phone')?.hasError('pattern')"
+                  class="m-0 p-0"
+                >
+                  Invalid Phone number.
+                </mat-error>
+              </mat-form-field>
+
+              <button
+                type="submit"
+                class="btn w-100 mb-2"
+                style="
+                  border-radius: 5px;
+                  background-color: rgba(0, 102, 167, 1);
+                  color: white;
+                "
+              >
+                Register
+              </button>
+              <span >
+                Back to Login
+                <a
+                  style="
+                    text-decoration: none;
+                    color: rgba(0, 102, 167, 1);
+                    cursor: pointer;
+                  "
+                  class="me-2 text-end"
+                  href="/auth/login"
+                  >Login</a
+                ></span
+              >
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</div>

@@ -6,11 +6,13 @@ export interface CampaignDetailModel {
   distributionType: string;
   rewardTypeName: string;
   id: number;
-  participants: ParticipantListModel[];
+  registeredParticipants: ParticipantListModel[];
+  notRegisteredParticipants: ParticipantListModel[];
 }
 export interface ParticipantListModel {
   email: string;
   isClaimed: boolean;
   isRegistered: boolean;
   rewardAmount: number;
+  id:number;
 }

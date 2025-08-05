@@ -65,9 +65,12 @@
           </h3>
           <mat-tab-group class="w-50 m-4">
             <mat-tab label="Registered Players">
-              <mat-list class="participants-list"  *ngFor="let participant of campaignDetails.participants">
-                <mat-list-item *ngIf="participant.isRegistered"
-                  class="participant-item "
+              <div *ngIf="campaignDetails.registeredParticipants.length==0" class="text-center mt-2">
+                No Registered players found!
+              </div>
+              <mat-list class="participants-list"  *ngFor="let participant of campaignDetails.registeredParticipants">
+                <mat-list-item
+                  class="participant-item"
                 >
                   <div class="participant-details p-1" >
                     <div class="participant-info">
@@ -87,8 +90,11 @@
               </mat-list>
             </mat-tab>
             <mat-tab label="Non-Registered Players">
-              <mat-list class="participants-list" *ngFor="let participant of campaignDetails.participants">
-                <mat-list-item *ngIf="!participant.isRegistered"
+              <div *ngIf="campaignDetails.notRegisteredParticipants.length==0" class="text-center mt-2">
+                No Non-registered players found!
+              </div>
+              <mat-list class="participants-list" *ngFor="let participant of campaignDetails.notRegisteredParticipants">
+                <mat-list-item
                   class="participant-item "
                 >
                   <div class="participant-details p-1" >
@@ -102,7 +108,7 @@
                         Reward: {{ participant.rewardAmount }} {{campaignDetails.rewardTypeName}}</span
                       >
                     </div>
-                    <mat-icon *ngIf="!participant.isClaimed && !isExpired" style="font-size: 30px;height: 30px;width: 30px;">link</mat-icon>
+                    <mat-icon *ngIf="!participant.isClaimed && !isExpired" style="font-size: 30px;height: 30px;width: 30px;cursor: pointer;" title="Send Invite" (click)="sendInvite(participant.id,participant.email,campaignDetails.title)">link</mat-icon>
                     <mat-icon *ngIf="participant.isClaimed" style="color:green;font-size: 30px;height: 30px;width: 30px;">check_circle_outline</mat-icon>
                   </div>
                 </mat-list-item>

@@ -1,0 +1,39 @@
+<div mat-dialog-content>
+  <div class="text-center p-2">
+    <h3 class="mt-4"  *ngIf="data.rewardText!='0'">Congratulations!</h3>
+    <h3 class="mt-4"  *ngIf="data.rewardText=='0'"> Oops!</h3>
+  </div>
+  <p
+    class="text-center fs-5 p-3 m-3"
+    style="background-color: rgba(0, 195, 255, 0.1); border-radius: 15px"
+    *ngIf="data.rewardText!='0'"
+  >
+
+    Congratulations you have won  {{ data.rewardText }} NEONS!
+    It has been added to your account.
+  </p>
+  <p
+    class="text-center fs-5 p-3 m-3"
+    style="background-color: rgba(0, 195, 255, 0.1); border-radius: 15px"
+    *ngIf="data.rewardText=='0'"
+  >
+
+    Sorry you have not won any NEONS this time.
+    Better luck next time!
+  </p>
+</div>
+<div mat-dialog-actions class="text-center mt-3">
+  <button  mat-button mat-dialog-close
+    color="primary"
+    class="btn w-75 p-2 m-2"
+    style="
+      background-color: rgb(180, 214, 245);
+      color: black;
+      border-radius: 15px;
+    "
+    (click)="closeDialog()"
+  >
+   Done
+  </button>
+
+</div>

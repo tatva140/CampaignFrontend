@@ -7,6 +7,7 @@ export interface Invitation {
   rewardTypeName: string;
   isClaimed: boolean;
   isExpired: boolean;
+  isDeleted: boolean;
   claimedCount: number;
 }
 export interface InvitationListResponse {
@@ -17,4 +18,5 @@ export interface InvitationListResponse {
   hasNextPage: boolean;
   hasPreviousPage: boolean;
   totalPages: number;
+  refCode:string;
 }

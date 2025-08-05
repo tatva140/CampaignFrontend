@@ -3,9 +3,48 @@
     <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span style="font-size: 30px; font-weight: 500" class="ms-3">Scratch And Win</span>
+    <span style="font-size: 30px; font-weight: 500" class="ms-3"
+      >Scratch And Win</span
+    >
   </div>
-  <button (click)="onLogout()">Logout</button>
+  <div class="d-flex align-items-center justify-content-start gap-4">
+    <mat-icon
+      matBadge="{{ notificationCount }}"
+      matBadgeColor="warn"
+      matBadgeSize="large"
+      style="font-size: 35px; width: 35px; height: 35px; cursor: pointer"
+      [matMenuTriggerFor]="appMenu"
+      >notifications</mat-icon
+    >
+    <mat-menu #appMenu="matMenu">
+      <div *ngFor="let notification of notifications">
+        <li class="mb-2 notification" style="list-style: none; padding: 0;" (click)="redirect(notification.participantId)">
+          <div class="dropdown-item" mat-menu-item
+              style="background-color: #f8f9fa; border-bottom: 1px solid #dee2e6; padding: 10px;">
+              <div class="d-flex align-items-center ">
+                  <div style="flex-grow: 1;">
+                      <span style="font-weight: bold; color: #212529; font-size: 16px;">{{notification.title}}</span>
+                      <p style="margin: 5px 0 0; color: #6c757d; font-size: 14px;word-wrap: break-word; ">
+                          {{notification.content}}</p>
+                  </div>
+                  <button class="btn btn-sm btn-outline-secondary ms-2" title="Mark as Read"
+                      style="border: none; background: none; cursor: pointer;"
+                     >
+                      <i class="fa-regular fa-circle-check" style="color: #28a745; font-size: 18px;"></i>
+                  </button>
+              </div>
+          </div>
+      </li>
+      </div>
+      <div class="text-end me-2"  style="cursor: pointer;">
+        <i class="fa-solid fa-check-double me-2" ></i>Mark all Read
+    </div>
+    </mat-menu>
+    <mat-icon (click)="onLogout()" class="logoutBtn"
+      >power_settings_new</mat-icon
+    >
+    <button (click)="onLogout()" class="logout">Logout</button>
+  </div>
 </nav>
 
 <mat-sidenav-container [ngClass]="!isCollapsed ? 'sidenav' : 'sidebar'">
@@ -25,6 +64,14 @@
             >link</mat-icon
           >
           <span class="ms-1 fs-4">Invitations</span>
+        </div>
+      </a>
+      <a routerLink="/history" mat-list-item>
+        <div class="d-flex align-items-center justify-content-start">
+          <mat-icon style="font-size: 30px; width: 30px; height: 30px"
+            >history</mat-icon
+          >
+          <span class="ms-1 fs-4">Points History</span>
         </div>
       </a>
     </mat-nav-list>
