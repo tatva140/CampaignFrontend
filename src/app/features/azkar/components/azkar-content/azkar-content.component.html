@@ -1,0 +1,67 @@
+<mat-drawer-container class="example-container" autosize style="background-color: white">
+  <mat-drawer #drawer="matDrawer" mode="side" position="end" class="lang-drawer p-5" style="background-color: white">
+    <h3>Select Language</h3>
+    <mat-nav-list>
+      <mat-list-item (click)="translate('en'); drawer.close()">English</mat-list-item>
+      <mat-list-item (click)="translate('ar'); drawer.close()">Arabic</mat-list-item>
+      <mat-list-item (click)="translate('fr'); drawer.close()">French</mat-list-item>
+      <mat-list-item (click)="translate('hi'); drawer.close()">Hindi</mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div *ngIf="content.length != 0" class="text-center mt-5">
+      <div class="d-flex align-items-start justify-content-center mb-4 gap-5">
+        <div class="text-start w-auto">
+          <mat-icon class="back-icon ms-3" (click)="goBack()">arrow_back</mat-icon>
+        </div>
+
+        <div *ngFor="let c of content" class="content-card">
+          <div class="d-flex align-items-start justify-content-center gap-5">
+            <h3 class="content-title w-75">
+              {{ c.translatedText || c.description }}
+            </h3>
+            <div>
+              <mat-icon
+                style="font-size: 30px; width: 30px; height: 30px; cursor: pointer;"
+                class="me-3"
+                (click)="toggleAudio(c)"
+                title= "{{ isPlaying(c) ? 'Pause' : 'Play' }}"
+              >
+                {{ isPlaying(c) ? 'pause' : 'volume_up' }}
+              </mat-icon>
+
+              <mat-icon
+                style="font-size: 30px; width: 30px; height: 30px; cursor: pointer;"
+                title="Bookmark"
+                class="me-3"
+                (click)="bookmark(c.id)"
+                *ngIf="!bookmarked"
+              >bookmark_border</mat-icon>
+
+              <mat-icon
+                style="font-size: 30px; width: 30px; height: 30px; cursor: pointer;"
+                title="Remove Bookmark"
+                class="me-3"
+                (click)="bookmark(c.id)"
+                *ngIf="bookmarked"
+              >bookmark</mat-icon>
+
+              <mat-icon
+                style="font-size: 30px; width: 30px; height: 30px; cursor: pointer;"
+                title="Language"
+                (click)="drawer.toggle()"
+              >language</mat-icon>
+            </div>
+          </div>
+
+          <div class="icon-wrapper">
+            <span class="repeat-badge" (click)="loadMore(c.repeat - 1)">
+              {{ repeatTrack + 1 }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

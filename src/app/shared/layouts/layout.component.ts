@@ -42,6 +42,9 @@ export class NavbarComponent {
   isCollapsed = true;
   notificationCount: number =0;
   notifications: NotificationsModel[]=[];
+  originalTitle = document.title;
+  campaignOpen = false;
+  azkarOpen = false;
   constructor(
     private localStorageService: LocalStorageService,
     private router: Router,
@@ -59,13 +62,20 @@ export class NavbarComponent {
     this.sidenav.open();
     this.isCollapsed = !this.isCollapsed;
   }
+  toggleCampaign() {
+    this.campaignOpen = !this.campaignOpen;
+  }
+  toggleAzkar() {
+    this.azkarOpen = !this.azkarOpen;
+  }
   loadNotification(){
     this.campaignService.loadNotifications()
     .subscribe({
       next: (data) => {
-        this.notificationCount=data.length;
-        this.notifications=data;
-        console.log(data);
+        this.notificationCount = data.length;
+        this.notifications = data;
+        if(this.notificationCount > 0)
+          document.title = `(${this.notificationCount}) ${this.originalTitle}`;
       },
       error: (err) => console.error(err),
     });
@@ -74,5 +84,15 @@ export class NavbarComponent {
   {
     this.router.navigate(['/invitation/scratch-card',Id]);
   }
-
+  markAsRead(id:number)
+  {
+    console.log(id);
+    this.campaignService.markAsRead(id)
+    .subscribe({
+      next: (data) => {
+        this.loadNotification();
+      },
+      error: (err) => console.error(err),
+    });
+  }
 }

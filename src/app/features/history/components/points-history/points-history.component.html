@@ -2,7 +2,7 @@
   <h2>Points History</h2>
 </div>
 <mat-form-field appearance="outline" class="col-md-4 col-12 ms-md-5 ms-0 mt-3">
-  <input matInput type="search" placeholder="Search..." (keyup)="onSearch($event)"/>
+  <input matInput type="text" placeholder="Search..." (keyup)="onSearch($event)"/>
 </mat-form-field>
 <app-points-history-card [items]="history"></app-points-history-card>
 <div class="d-flex align-items-center justify-content-center">

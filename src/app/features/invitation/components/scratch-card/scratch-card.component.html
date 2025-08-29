@@ -29,25 +29,26 @@
         Let the fun begin! ✨
       </p>
     </div>
-    <div *ngIf="!canClaimReward">
+    <div *ngIf="!canClaimReward && !isExpired && !isDeleted" class="col-xl-6 col-12">
       <h3>
         Oops! Something went wrong!
+        It seems you have already claimed a reward!
       </h3>
     </div>
-    <div *ngIf="isExpired">
+    <div *ngIf="isExpired" class="col-xl-6 col-12">
       <h3>
         Scratch & Win Expired!
       </h3>
       <h4>This reward is no longer available, the campaign is already expired.</h4>
     </div>
-    <div *ngIf="isDeleted">
+    <div *ngIf="isDeleted" class="col-xl-6 col-12">
       <h3>
         Campaign is deleted
       </h3>
       <h4>This campaign was deleted by the creator.</h4>
     </div>
 
-    <div class="col-xl-6 col-12" *ngIf="!isDeleted && !isExpired">
+    <div class="col-xl-6 col-12" *ngIf="!isDeleted && !isExpired && canClaimReward">
         <div class="scratch-cards-container">
           <div
             class="scratch-card"
@@ -66,6 +67,5 @@
         </div>
         </div>
     </div>
-
   </div>
 </div>

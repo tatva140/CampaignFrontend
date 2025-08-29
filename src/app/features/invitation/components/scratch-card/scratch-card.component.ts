@@ -31,7 +31,15 @@ export class ScratchCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.id = parseInt(this.route.snapshot.paramMap.get('id') || '0');
+    this.route.params.subscribe((params) => {
+      if(this.id!= +params['id'])
+      {
+        this.id = +params['id'];
+        this.loadDetails();
+      }
+    });
+  }
+  loadDetails() {
     this.invitationService.getScratchCardDetails(this.id).subscribe({
       next: (invitations) => {
         this.campaignId = invitations.id;
@@ -39,10 +47,6 @@ export class ScratchCardComponent implements OnInit {
         this.isExpired = invitations.isExpired;
         this.isDeleted = invitations.isDeleted;
         if (invitations.isExpired || invitations.isDeleted) {
-          return;
-        }
-        if (!invitations.canClaimReward) {
-          this.router.navigate(['/invitation']);
           return;
         }
 
@@ -74,7 +78,6 @@ export class ScratchCardComponent implements OnInit {
       },
     });
   }
-
   private async setup(): Promise<void> {
     this.generateCards();
     await this.initScratchCards();
@@ -112,12 +115,12 @@ export class ScratchCardComponent implements OnInit {
             this.invitationService.claimReward(this.campaignId).subscribe({
               next: () => {
                 console.log(`Reward claimed: ${card.rewardText}`);
+                this.router.navigate(['/invitation']);
               },
               error: (error) => {
                 console.error('Error claiming reward:', error);
               },
             });
-            this.router.navigate(['/invitation']);
             this.dialog.open(RewardDialogComponent, {
               data: { rewardText: card.rewardText },
             });

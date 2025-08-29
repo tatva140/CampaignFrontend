@@ -15,12 +15,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { CampaignService } from '../../../../shared/services/campaign.service';
 import { RewardTypesModel } from '../../models/reward-types.model';
 import { ParticipantFormComponent } from '../../../../shared/components/participant-form.component';
+import { APP_DATE_FORMATS, AppDateAdapter } from '../../../../shared/pipes/format-datepicker';
 declare const toastr: any;
 
 @Component({
@@ -41,7 +42,11 @@ declare const toastr: any;
   ],
   templateUrl: './campaign-add-form.component.html',
   styleUrl: './campaign-add-form.component.css',
-  providers: [provideNativeDateAdapter()],
+  providers : [
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ],
+
 })
 export class CreateCampaignComponent implements OnInit {
   createCampaignForm!: FormGroup;
@@ -140,7 +145,7 @@ export class CreateCampaignComponent implements OnInit {
   }
   futureDateValidator(control: AbstractControl): ValidationErrors | null {
     const inputDate = new Date(control.value);
-    if (control.value && inputDate < new Date()) {
+    if (control.value && inputDate.getDate() < new Date().getDate()) {
       return { invalidExpiryDate: true };
     }
     return null;
@@ -179,7 +184,6 @@ export class CreateCampaignComponent implements OnInit {
     if (rewardAmount.some((e) => e == 0)) {
       return null;
     }
-
     if (
       expectedTotal !== undefined &&
       expectedTotal !== null &&

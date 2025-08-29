@@ -86,7 +86,6 @@ export class RegisterComponent implements OnInit {
     }
     return null;
   }
-
   async onRegister() {
     this.submitted = true;
     if (!this.registerForm.invalid) {

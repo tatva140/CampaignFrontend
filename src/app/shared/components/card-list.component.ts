@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output,EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -14,9 +14,9 @@ import { Router } from '@angular/router';
 })
 export class CardListComponent {
   @Input() items: any[] = [];
-  @Output() cardDeleted=new EventEmitter<void>();
+  @Output() cardDeleted = new EventEmitter<void>();
 
-  constructor(private dialog: MatDialog,private router:Router) {}
+  constructor(private dialog: MatDialog, private router: Router) {}
 
   openConfirmation(Id: number) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
@@ -30,13 +30,13 @@ export class CardListComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-       this.cardDeleted.emit();
+        this.cardDeleted.emit();
       } else {
-        console.log('Action canceled.');
+        console.log('Action cancelled.');
       }
     });
   }
-  viewCampaign(Id:number){
-    this.router.navigate(['/campaign/view',Id]);
+  viewCampaign(Id: number) {
+    this.router.navigate(['/campaign/view', Id]);
   }
 }

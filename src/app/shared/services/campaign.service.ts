@@ -77,5 +77,10 @@ export class CampaignService {
     const response = this.http.get<NotificationsModel[]>(`${this.apiUrl}user/notifications`);
     return response;
   }
+  markAsRead(id:number)
+  {
+    const response = this.http.patch<{}>(`${this.apiUrl}user/notification/markAsRead`,id)
+    return response;
+  }
 
 }

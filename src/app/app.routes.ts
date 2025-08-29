@@ -7,6 +7,8 @@ import { CreateCampaignComponent } from './features/campaign/components/campaign
 import { InvitationListComponent } from './features/invitation/components/invitation-list/invitation-list.component';
 import { ScratchCardComponent } from './features/invitation/components/scratch-card/scratch-card.component';
 import { PointsHistoryComponent } from './features/history/components/points-history/points-history.component';
+import { AzkarListComponent } from './features/azkar/components/azkar-list/azkar-list.component';
+import { AzkarContentComponent } from './features/azkar/components/azkar-content/azkar-content.component';
 
 export const routes: Routes = [
   {
@@ -65,6 +67,22 @@ export const routes: Routes = [
         component: PointsHistoryComponent,
         canActivate: [AuthGuard],
       }
+    ],
+  },
+  {
+    path: 'islamic',
+    component: NavbarComponent,
+    children: [
+      {
+        path: 'azkar',
+        component: AzkarListComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'azkar/content/:id',
+        component: AzkarContentComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   },
 ];

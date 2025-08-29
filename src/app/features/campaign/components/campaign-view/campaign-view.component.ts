@@ -49,7 +49,7 @@ export class CampaignViewComponent {
     this.campaignService.getCampaign(Number(this.campaignId)).subscribe({
       next: (data) => {
         this.campaignDetails = data;
-        if (new Date() > new Date(data.expiryDate)) this.isExpired = true;
+        if (new Date().getDate() > new Date(data.expiryDate).getDate()) this.isExpired = true;
       },
       error: (err) => {
         toastr.error(err.error.description);

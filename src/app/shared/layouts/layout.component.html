@@ -4,7 +4,7 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span style="font-size: 30px; font-weight: 500" class="ms-3"
-      >Scratch And Win</span
+      >Lifestyle</span
     >
   </div>
   <div class="d-flex align-items-center justify-content-start gap-4">
@@ -17,28 +17,65 @@
       >notifications</mat-icon
     >
     <mat-menu #appMenu="matMenu">
-      <div *ngFor="let notification of notifications">
-        <li class="mb-2 notification" style="list-style: none; padding: 0;" (click)="redirect(notification.participantId)">
-          <div class="dropdown-item" mat-menu-item
-              style="background-color: #f8f9fa; border-bottom: 1px solid #dee2e6; padding: 10px;">
-              <div class="d-flex align-items-center ">
-                  <div style="flex-grow: 1;">
-                      <span style="font-weight: bold; color: #212529; font-size: 16px;">{{notification.title}}</span>
-                      <p style="margin: 5px 0 0; color: #6c757d; font-size: 14px;word-wrap: break-word; ">
-                          {{notification.content}}</p>
-                  </div>
-                  <button class="btn btn-sm btn-outline-secondary ms-2" title="Mark as Read"
-                      style="border: none; background: none; cursor: pointer;"
-                     >
-                      <i class="fa-regular fa-circle-check" style="color: #28a745; font-size: 18px;"></i>
-                  </button>
+      <div *ngIf="notifications.length != 0">
+        <div *ngFor="let notification of notifications">
+          <li
+            class="mb-2 notification"
+            style="list-style: none; padding: 0"
+            (click)="
+              $event.stopPropagation(); redirect(notification.participantId)
+            "
+          >
+            <div
+              class="dropdown-item"
+              mat-menu-item
+              style="
+                background-color: #f8f9fa;
+                border-bottom: 1px solid #dee2e6;
+                padding: 10px;
+              "
+            >
+              <div class="d-flex align-items-center">
+                <div style="flex-grow: 1">
+                  <span
+                    style="font-weight: bold; color: #212529; font-size: 16px"
+                    >{{ notification.title }}</span
+                  >
+                  <p
+                    style="
+                      margin: 5px 0 0;
+                      color: #6c757d;
+                      font-size: 14px;
+                      word-wrap: break-word;
+                    "
+                  >
+                    {{ notification.content }}
+                  </p>
+                </div>
+                <button
+                  class="btn btn-sm btn-outline-secondary ms-2"
+                  title="Mark as Read"
+                  style="border: none; background: none; cursor: pointer"
+                >
+                  <i
+                    class="fa-regular fa-circle-check"
+                    style="color: #28a745; font-size: 18px"
+                    (click)="
+                      $event.stopPropagation(); markAsRead(notification.id)
+                    "
+                  ></i>
+                </button>
               </div>
-          </div>
-      </li>
-      </div>
-      <div class="text-end me-2"  style="cursor: pointer;">
+            </div>
+          </li>
+        </div>
+        <div *ngIf="notifications.length == 0">
+          <p>No notification found!</p>
+        </div>
+        <!-- <div class="text-end me-2"  style="cursor: pointer;">
         <i class="fa-solid fa-check-double me-2" ></i>Mark all Read
-    </div>
+      </div> -->
+      </div>
     </mat-menu>
     <mat-icon (click)="onLogout()" class="logoutBtn"
       >power_settings_new</mat-icon
@@ -50,30 +87,54 @@
 <mat-sidenav-container [ngClass]="!isCollapsed ? 'sidenav' : 'sidebar'">
   <mat-sidenav [opened]="isCollapsed">
     <mat-nav-list>
-      <a routerLink="/campaign" mat-list-item>
+      <mat-list-item (click)="toggleCampaign()">
         <div class="d-flex align-items-center justify-content-start">
           <mat-icon style="font-size: 30px; width: 30px; height: 30px"
             >campaign</mat-icon
           >
-          <span class="ms-1 fs-4">Campaigns</span>
+          <span class="ms-1 fs-4">Scratch & Win</span>
+          <span class="spacer"></span>
+          <mat-icon style="font-size: 30px; width: 30px; height: 30px">{{ campaignOpen ? "expand_less" : "expand_more" }}</mat-icon>
         </div>
-      </a>
-      <a routerLink="/invitation" mat-list-item>
+      </mat-list-item>
+      <div *ngIf="campaignOpen" class="ms-3">
+        <a routerLink="/campaign" mat-list-item >
+          <div class="d-flex align-items-center justify-content-start">
+            <mat-icon style="font-size: 20px; width: 20px; height: 20px"
+              >campaign</mat-icon>
+            <span class="ms-1 fs-5">Campaigns</span>
+          </div>
+        </a>
+        <a routerLink="/invitation" mat-list-item >
+          <div class="d-flex align-items-center justify-content-start">
+            <mat-icon style="font-size: 20px; width: 20px; height: 20px"
+              >link</mat-icon>
+            <span class="ms-1 fs-5">Invitations</span>
+          </div>
+        </a>
+        <a routerLink="/history" mat-list-item >
+          <div class="d-flex align-items-center justify-content-start">
+            <mat-icon style="font-size: 20px; width: 20px; height: 20px" fontIcon="history"></mat-icon>
+            <span class="ms-1 fs-5">Points History</span>
+          </div>
+        </a>
+      </div>
+      <mat-list-item (click)="toggleAzkar()">
         <div class="d-flex align-items-center justify-content-start">
-          <mat-icon style="font-size: 30px; width: 30px; height: 30px"
-            >link</mat-icon
-          >
-          <span class="ms-1 fs-4">Invitations</span>
+          <mat-icon fontIcon="mosque"></mat-icon>
+          <span class="ms-2 fs-4">Islamic</span>
+          <span class="spacer"></span>
+          <mat-icon style="font-size: 30px; width: 30px; height: 30px">{{ azkarOpen ? "expand_less" : "expand_more" }}</mat-icon>
         </div>
-      </a>
-      <a routerLink="/history" mat-list-item>
-        <div class="d-flex align-items-center justify-content-start">
-          <mat-icon style="font-size: 30px; width: 30px; height: 30px"
-            >history</mat-icon
-          >
-          <span class="ms-1 fs-4">Points History</span>
-        </div>
-      </a>
+      </mat-list-item>
+      <div *ngIf="azkarOpen" class="ms-3">
+        <a routerLink="/islamic/azkar" mat-list-item>
+          <div class="d-flex align-items-center justify-content-start">
+            <mat-icon fontIcon="mosque" style="font-size: 20px; width: 20px; height: 20px"></mat-icon>
+            <span class="ms-1 fs-5">Azkars</span>
+          </div>
+        </a>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
 </mat-sidenav-container>

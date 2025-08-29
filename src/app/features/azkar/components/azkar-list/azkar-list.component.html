@@ -1,0 +1,14 @@
+<div class="d-flex align-items-center justify-content-between">
+  <h2>Azkar List</h2>
+</div>
+<div *ngIf="azkars.length==0" class="text-center mt-5">
+  <i class="fas fa-calendar-times mt-5 mb-3" style="font-size: 50px;"></i>
+  <h3 style="color: #495057; margin-bottom:1.5rem;">No Azkars Found</h3>
+  <h5 style="margin-bottom: 1.5rem;">We couldn't find any azkars.</h5>
+</div>
+<app-azkar-card-list [items]="azkars" (moreAzkars)="loadSubCategories($event)"></app-azkar-card-list>
+<div class="d-flex align-items-center justify-content-center ">
+  <button (click)="loadMore(false)" *ngIf="hasNextPage" class="btn loadMore mb-5">
+    Load More
+  </button>
+</div>
